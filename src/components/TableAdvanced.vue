@@ -34,63 +34,84 @@
                 </v-btn>
               </div>
             </template>
-            <v-card class="pa-2">
-              <v-card-title class="px-4">
+
+            <v-card class="pa-6">
+              <v-card-title class="pa-0">
                 <span class="text-h5">Dialog Title</span>
               </v-card-title>
-              <v-card-text class="px-4">
-                <v-container>
-                  <v-row>
-                    <v-col cols="12" class="mb-0 pa-0">
-                      <v-text-field label="Full Name*" required></v-text-field>
-                    </v-col>
-                    <v-col cols="12" class="mb-0 pa-0">
-                      <v-text-field label="Email*" required></v-text-field>
-                    </v-col>
-                    <v-col cols="12" class="mb-0 pa-0">
-                      <v-text-field
-                        label="Password*"
-                        type="password"
-                        required
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
-                </v-container>
-                <small>*indicates required field</small>
-              </v-card-text>
-              <v-card-actions class="px-2">
+
+              <v-form ref="form" v-model="valid" lazy-validation>
+                <v-text-field
+                  v-model="name"
+                  :counter="10"
+                  :rules="nameRules"
+                  label="Name"
+                  required
+                ></v-text-field>
+
+                <v-text-field
+                  v-model="email"
+                  :rules="emailRules"
+                  label="E-mail"
+                  required
+                ></v-text-field>
+
+                <v-select
+                  v-model="select"
+                  :items="items"
+                  :rules="[(v) => !!v || 'Item is required']"
+                  label="Item"
+                  required
+                ></v-select>
+
+                <v-checkbox
+                  v-model="checkbox"
+                  :rules="[(v) => !!v || 'You must agree to continue!']"
+                  label="Do you agree?"
+                  required
+                ></v-checkbox>
+
+                <v-card-actions class="pa-0 mt-4">
+                  <v-spacer></v-spacer>
+                  <v-btn depressed class="text-none" @click="dialog = false">
+                    Close
+                  </v-btn>
+                  <v-btn
+                    depressed
+                    class="primary ms-3 text-none"
+                    @click="dialog = false"
+                  >
+                    Save
+                  </v-btn>
+                </v-card-actions>
+              </v-form>
+            </v-card>
+          </v-dialog>
+          <v-dialog v-model="dialogDelete" max-width="500px">
+            <v-card class="pa-6">
+              <v-card-title class="pa-0 mb-2">
+                <span class="text-h5">Dialog Title</span>
+              </v-card-title>
+              <p>Are you sure you want to delete this endpoint?</p>
+              <v-card-actions class="pa-0 mt-4">
                 <v-spacer></v-spacer>
                 <v-btn depressed class="text-none" @click="dialog = false">
                   Close
                 </v-btn>
                 <v-btn
                   depressed
-                  class="primary ms-3 text-none"
+                  class="error ms-3 text-none"
                   @click="dialog = false"
                 >
-                  Save
+                  Delete
                 </v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
-          <v-dialog v-model="dialogDelete" max-width="500px">
-            <v-card>
-              <v-card-title class="text-h5"
-                >Are you sure you want to delete this item?</v-card-title
-              >
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete"
-                  >Cancel</v-btn
-                >
-                <v-btn color="blue darken-1" text @click="deleteItemConfirm"
-                  >OK</v-btn
-                >
-                <v-spacer></v-spacer>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
         </v-toolbar>
+        <small
+          ><span>{{ placeholder }}f</span></small
+        >
       </template>
 
       <template v-slot:[`item.actions`]="{ item }">
@@ -109,24 +130,38 @@ export default {
   data: () => ({
     dialog: false,
     dialogDelete: false,
-    search: '',
+    valid: true,
+    name: "",
+    nameRules: [
+      (v) => !!v || "Name is required",
+      (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
+    ],
+    email: "",
+    emailRules: [
+      (v) => !!v || "E-mail is required",
+      (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+    ],
+    select: null,
+    items: ["Item 1", "Item 2", "Item 3", "Item 4"],
+    checkbox: false,
+    search: "",
     headers: [
       {
-        text: 'Dessert (100g serving)',
-        align: 'start',
+        text: "Dessert (100g serving)",
+        align: "start",
         filterable: false,
-        value: 'name',
+        value: "name",
       },
-      { text: 'Calories', value: 'calories' },
-      { text: 'Fat (g)', value: 'fat' },
-      { text: 'Carbs (g)', value: 'carbs' },
-      { text: 'Protein (g)', value: 'protein' },
-      { text: 'Iron (%)', value: 'iron' },
-      { text: 'Actions', value: 'actions', sortable: false },
+      { text: "Calories", value: "calories" },
+      { text: "Fat (g)", value: "fat" },
+      { text: "Carbs (g)", value: "carbs" },
+      { text: "Protein (g)", value: "protein" },
+      { text: "Iron (%)", value: "iron" },
+      { text: "Actions", value: "actions", sortable: false },
     ],
     desserts: [
       {
-        name: 'Frozen Yogurt',
+        name: "Frozen Yogurt",
         calories: 159,
         fat: 6.0,
         carbs: 24,
@@ -134,7 +169,7 @@ export default {
         iron: 1,
       },
       {
-        name: 'Ice cream sandwich',
+        name: "Ice cream sandwich",
         calories: 237,
         fat: 9.0,
         carbs: 37,
@@ -142,7 +177,7 @@ export default {
         iron: 1,
       },
       {
-        name: 'Eclair',
+        name: "Eclair",
         calories: 262,
         fat: 16.0,
         carbs: 23,
@@ -150,7 +185,7 @@ export default {
         iron: 7,
       },
       {
-        name: 'Cupcake',
+        name: "Cupcake",
         calories: 305,
         fat: 3.7,
         carbs: 67,
@@ -158,7 +193,7 @@ export default {
         iron: 8,
       },
       {
-        name: 'Gingerbread',
+        name: "Gingerbread",
         calories: 356,
         fat: 16.0,
         carbs: 49,
@@ -166,7 +201,7 @@ export default {
         iron: 16,
       },
       {
-        name: 'Jelly bean',
+        name: "Jelly bean",
         calories: 375,
         fat: 0.0,
         carbs: 94,
@@ -174,7 +209,7 @@ export default {
         iron: 0,
       },
       {
-        name: 'Lollipop',
+        name: "Lollipop",
         calories: 392,
         fat: 0.2,
         carbs: 98,
@@ -182,7 +217,7 @@ export default {
         iron: 2,
       },
       {
-        name: 'Honeycomb',
+        name: "Honeycomb",
         calories: 408,
         fat: 3.2,
         carbs: 87,
@@ -190,7 +225,7 @@ export default {
         iron: 45,
       },
       {
-        name: 'Donut',
+        name: "Donut",
         calories: 452,
         fat: 25.0,
         carbs: 51,
@@ -198,7 +233,7 @@ export default {
         iron: 22,
       },
       {
-        name: 'KitKat',
+        name: "KitKat",
         calories: 518,
         fat: 26.0,
         carbs: 65,
@@ -208,14 +243,14 @@ export default {
     ],
     editedIndex: -1,
     editedItem: {
-      name: '',
+      name: "",
       calories: 0,
       fat: 0,
       carbs: 0,
       protein: 0,
     },
     defaultItem: {
-      name: '',
+      name: "",
       calories: 0,
       fat: 0,
       carbs: 0,
@@ -225,7 +260,7 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item';
+      return this.editedIndex === -1 ? "New Item" : "Edit Item";
     },
   },
 
@@ -243,73 +278,82 @@ export default {
   },
 
   methods: {
+    validate() {
+      this.$refs.form.validate();
+    },
+    reset() {
+      this.$refs.form.reset();
+    },
+    resetValidation() {
+      this.$refs.form.resetValidation();
+    },
     initialize() {
       this.desserts = [
         {
-          name: 'Frozen Yogurt',
+          name: "Frozen Yogurt",
           calories: 159,
           fat: 6.0,
           carbs: 24,
           protein: 4.0,
         },
         {
-          name: 'Ice cream sandwich',
+          name: "Ice cream sandwich",
           calories: 237,
           fat: 9.0,
           carbs: 37,
           protein: 4.3,
         },
         {
-          name: 'Eclair',
+          name: "Eclair",
           calories: 262,
           fat: 16.0,
           carbs: 23,
           protein: 6.0,
         },
         {
-          name: 'Cupcake',
+          name: "Cupcake",
           calories: 305,
           fat: 3.7,
           carbs: 67,
           protein: 4.3,
         },
         {
-          name: 'Gingerbread',
+          name: "Gingerbread",
           calories: 356,
           fat: 16.0,
           carbs: 49,
           protein: 3.9,
         },
         {
-          name: 'Jelly bean',
+          name: "Jelly bean",
           calories: 375,
           fat: 0.0,
           carbs: 94,
           protein: 0.0,
         },
         {
-          name: 'Lollipop',
+          name: "Lollipop",
           calories: 392,
           fat: 0.2,
           carbs: 98,
           protein: 0,
         },
         {
-          name: 'Honeycomb',
+          name: "Honeycomb",
           calories: 408,
           fat: 3.2,
           carbs: 87,
           protein: 6.5,
         },
         {
-          name: 'Donut',
+          name: "Donut",
           calories: 452,
           fat: 25.0,
           carbs: 51,
           protein: 4.9,
         },
         {
-          name: 'KitKat',
+          name: "KitKat",
           calories: 518,
           fat: 26.0,
           carbs: 65,
