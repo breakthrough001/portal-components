@@ -7,17 +7,7 @@
           Always make sure buttons have a 12px margin between the two seperating
           them.
         </p>
-        <v-btn depressed class="text-none primary">Primary</v-btn>
-        <div class="mb-4"></div>
-        <v-btn depressed class="text-none">Secondary</v-btn>
-        <div class="mb-4"></div>
-        <v-btn outlined color="primary" class="text-none">Outlined</v-btn>
-        <div class="mb-4"></div>
-        <v-btn text color="primary" class="text-none">Text Link</v-btn>
-        <div class="mb-4"></div>
-        <v-btn depressed color="warning" class="text-none">Warning</v-btn>
-        <div class="mb-4"></div>
-        <v-btn depressed color="error" class="text-none">Delete</v-btn>
+        <Buttons />
       </div>
       <div class="mb-16">
         <h1 class="mb-4">Content Cards</h1>
@@ -30,6 +20,7 @@
           fields.
         </p>
         <Dialog />
+        <p class="mt-10">Examples below for different user actions:</p>
         <div class="mt-4">
           <Modal />
         </div>
@@ -47,6 +38,7 @@
 </template>
 
 <script>
+import Buttons from './components/Buttons.vue';
 import Dialog from './components/Dialog';
 import MainCard from './components/ContentCard';
 import Modal from './components/Modal';
@@ -56,6 +48,7 @@ import TableAdvanced from './components/TableAdvanced';
 export default {
   name: 'App',
   components: {
+    Buttons,
     Dialog,
     MainCard,
     Modal,

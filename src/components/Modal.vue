@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb-10">
-      <v-card elevation="2" style="width: 600px" class="pa-2"
+      <v-card elevation="2" style="width: 500px" class="pa-2"
         ><v-card-title class="mb-1">Modal Title</v-card-title
         ><v-card-subtitle
           >Are you sure you want to save these changes?</v-card-subtitle
@@ -14,7 +14,7 @@
     </div>
 
     <div class="mb-10">
-      <v-card elevation="2" style="width: 600px" class="pa-2"
+      <v-card elevation="2" style="width: 500px" class="pa-2"
         ><v-card-title class="mb-1">Modal Title</v-card-title
         ><v-card-subtitle
           >Are you sure you want to release isolation for this
