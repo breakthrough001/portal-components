@@ -2,7 +2,7 @@
   <div>
     <div class="mb-10">
       <v-card elevation="2" style="width: 500px" class="pa-2"
-        ><v-card-title class="mb-1">Modal Title</v-card-title
+        ><v-card-title class="mb-1">Modal Normal</v-card-title
         ><v-card-subtitle
           >Are you sure you want to save these changes?</v-card-subtitle
         >
@@ -15,7 +15,7 @@
 
     <div class="mb-10">
       <v-card elevation="2" style="width: 500px" class="pa-2"
-        ><v-card-title class="mb-1">Modal Title</v-card-title
+        ><v-card-title class="mb-1">Modal Warning</v-card-title
         ><v-card-subtitle
           >Are you sure you want to release isolation for this
           Endpoint?</v-card-subtitle
@@ -28,9 +28,9 @@
         </v-card-actions></v-card
       >
     </div>
-    <div class="mb-10">
+    <div>
       <v-card elevation="2" style="width: 500px" class="pa-2"
-        ><v-card-title class="mb-1">Modal Title</v-card-title
+        ><v-card-title class="mb-1">Modal Delete</v-card-title
         ><v-card-subtitle
           >Are you sure you want to delete this Endpoint?</v-card-subtitle
         >
