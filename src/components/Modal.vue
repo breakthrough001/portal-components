@@ -12,6 +12,7 @@
         </v-card-actions></v-card
       >
     </div>
+
     <div class="mb-10">
       <v-card elevation="2" style="width: 600px" class="pa-2"
         ><v-card-title class="mb-1">Modal Title</v-card-title
@@ -28,7 +29,7 @@
       >
     </div>
     <div class="mb-10">
-      <v-card elevation="2" style="width: 600px" class="pa-2"
+      <v-card elevation="2" style="width: 500px" class="pa-2"
         ><v-card-title class="mb-1">Modal Title</v-card-title
         ><v-card-subtitle
           >Are you sure you want to delete this Endpoint?</v-card-subtitle
@@ -43,7 +44,7 @@
 </template>
 
 <script>
-export default { name: "Modal" };
+export default { name: 'Modal' };
 </script>
 
 <style></style>

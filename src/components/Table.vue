@@ -1,36 +1,43 @@
 <template>
-  <v-card elevation="2" class="px-6 pt-6 pb-3"
-    ><v-card-title class="px-0 pt-0">Table Title</v-card-title>
+  <v-card elevation="2" class="px-6 pt-6 pb-3">
+    <v-card-title class="pa-0">Table </v-card-title>
+    <v-text-field
+      v-model="search"
+      prepend-inner-icon="mdi-magnify"
+      label="Search"
+      single-line
+      hide-details
+      class="col-3 my-6 pa-0"
+    ></v-text-field>
     <v-data-table
       :headers="headers"
       :items="desserts"
-      :items-per-page="5"
-      class="elevation-0"
+      :search="search"
     ></v-data-table>
   </v-card>
 </template>
 
 <script>
 export default {
-  name: "Table",
   data() {
     return {
+      search: '',
       headers: [
         {
-          text: "Dessert (100g serving)",
-          align: "start",
-          sortable: false,
-          value: "name",
+          text: 'Dessert (100g serving)',
+          align: 'start',
+          filterable: false,
+          value: 'name',
         },
-        { text: "Calories", value: "calories" },
-        { text: "Fat (g)", value: "fat" },
-        { text: "Carbs (g)", value: "carbs" },
-        { text: "Protein (g)", value: "protein" },
-        { text: "Iron (%)", value: "iron" },
+        { text: 'Calories', value: 'calories' },
+        { text: 'Fat (g)', value: 'fat' },
+        { text: 'Carbs (g)', value: 'carbs' },
+        { text: 'Protein (g)', value: 'protein' },
+        { text: 'Iron (%)', value: 'iron' },
       ],
       desserts: [
         {
-          name: "Frozen Yogurt",
+          name: 'Frozen Yogurt',
           calories: 159,
           fat: 6.0,
           carbs: 24,
@@ -38,7 +45,7 @@ export default {
           iron: 1,
         },
         {
-          name: "Ice cream sandwich",
+          name: 'Ice cream sandwich',
           calories: 237,
           fat: 9.0,
           carbs: 37,
@@ -46,7 +53,7 @@ export default {
           iron: 1,
         },
         {
-          name: "Eclair",
+          name: 'Eclair',
           calories: 262,
           fat: 16.0,
           carbs: 23,
@@ -54,7 +61,7 @@ export default {
           iron: 7,
         },
         {
-          name: "Cupcake",
+          name: 'Cupcake',
           calories: 305,
           fat: 3.7,
           carbs: 67,
@@ -62,7 +69,7 @@ export default {
           iron: 8,
         },
         {
-          name: "Gingerbread",
+          name: 'Gingerbread',
           calories: 356,
           fat: 16.0,
           carbs: 49,
@@ -70,7 +77,7 @@ export default {
           iron: 16,
         },
         {
-          name: "Jelly bean",
+          name: 'Jelly bean',
           calories: 375,
           fat: 0.0,
           carbs: 94,
@@ -78,7 +85,7 @@ export default {
           iron: 0,
         },
         {
-          name: "Lollipop",
+          name: 'Lollipop',
           calories: 392,
           fat: 0.2,
           carbs: 98,
@@ -86,7 +93,7 @@ export default {
           iron: 2,
         },
         {
-          name: "Honeycomb",
+          name: 'Honeycomb',
           calories: 408,
           fat: 3.2,
           carbs: 87,
@@ -94,7 +101,7 @@ export default {
           iron: 45,
         },
         {
-          name: "Donut",
+          name: 'Donut',
           calories: 452,
           fat: 25.0,
           carbs: 51,
@@ -102,7 +109,7 @@ export default {
           iron: 22,
         },
         {
-          name: "KitKat",
+          name: 'KitKat',
           calories: 518,
           fat: 26.0,
           carbs: 65,
