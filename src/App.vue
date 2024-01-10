@@ -43,19 +43,31 @@
       </div>
       <div class="mb-16">
         <div class="mb-4">
-          <h1 class="mb-4 d-inline">Content Cards</h1>
+          <h1 class="mb-4 d-inline">Card - Content</h1>
           <a
-            href="https://github.com/breakthrough001/portal-components/blob/main/src/components/ContentCard.vue"
+            href="https://github.com/breakthrough001/portal-components/blob/main/src/components/CardTabss.vue"
             target="_blank"
             class="ms-4"
             >View code</a
           >
         </div>
-        <MainCard />
+        <CardContent />
+      </div>
+      <div class="mb-16">
+        <div class="mb-4">
+          <h1 class="mb-4 d-inline">Card - Tabs</h1>
+          <a
+            href="https://github.com/breakthrough001/portal-components/blob/main/src/components/CardContent.vue"
+            target="_blank"
+            class="ms-4"
+            >View code</a
+          >
+        </div>
+        <CardTabs />
       </div>
       <div class="mb-16">
         <div>
-          <h1 class="mb-1 d-inline">Dialogs</h1>
+          <h1 class="mb-1 d-inline">Dialog With Form</h1>
           <a
             href="https://github.com/breakthrough001/portal-components/blob/main/src/components/Dialog.vue"
             target="_blank"
@@ -68,27 +80,27 @@
           fields.
         </p>
         <Dialog />
-        <p class="mt-10">
-          Click the "OPEN DELETE DIALOG" button to view a sample modal with
-          text.
-        </p>
-        <DialogDelete />
       </div>
       <div class="mb-16">
-        <div class="mb-4">
-          <h1 class="mb-4 d-inline">Tables</h1>
+        <div>
+          <h1 class="mb-1 d-inline">Dialog With Text</h1>
           <a
-            href="https://github.com/breakthrough001/portal-components/blob/main/src/components/Table.vue"
+            href="https://github.com/breakthrough001/portal-components/blob/main/src/components/DialogDelete.vue"
             target="_blank"
             class="ms-4"
             >View code</a
           >
         </div>
-        <Table />
+        <p>
+          Click the "OPEN DELETE DIALOG" button to view a sample modal with
+          text.
+        </p>
+        <DialogDelete />
       </div>
+
       <div class="mb-16">
-        <div class="mb-4">
-          <h1 class="mb-4 d-inline">Advanced Tables</h1>
+        <div>
+          <h1 class="mb-4 d-inline">Tables - Advanced</h1>
           <a
             href="https://github.com/breakthrough001/portal-components/blob/main/src/components/TableAdvanced.vue"
             target="_blank"
@@ -96,7 +108,21 @@
             >View code</a
           >
         </div>
+        <p class="mb-4">Sample table nested inside of a card.</p>
         <TableAdvanced />
+      </div>
+      <div class="mb-16">
+        <div>
+          <h1 class="mb-4 d-inline">Tables - Simple</h1>
+          <a
+            href="https://github.com/breakthrough001/portal-components/blob/main/src/components/Table.vue"
+            target="_blank"
+            class="ms-4"
+            >View code</a
+          >
+        </div>
+        <p class="mb-4">Sample table nested inside of a card.</p>
+        <Table />
       </div>
     </div>
   </v-app>
@@ -106,7 +132,8 @@
 import Buttons from "./components/Buttons.vue";
 import Dialog from "./components/Dialog";
 import DialogDelete from "./components/DialogDelete.vue";
-import MainCard from "./components/ContentCard";
+import CardContent from "./components/CardContent";
+import CardTabs from "./components/CardTabs.vue";
 import Table from "./components/Table";
 import TableAdvanced from "./components/TableAdvanced";
 
@@ -114,9 +141,10 @@ export default {
   name: "App",
   components: {
     Buttons,
+    CardTabs,
     Dialog,
     DialogDelete,
-    MainCard,
+    CardContent,
     Table,
     TableAdvanced,
   },

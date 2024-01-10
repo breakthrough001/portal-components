@@ -8,8 +8,6 @@
   </v-card>
 </template>
 
-<script>
-export default { name: "ContentCard" };
-</script>
+<script></script>
 
 <style></style>
