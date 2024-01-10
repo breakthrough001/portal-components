@@ -9,7 +9,7 @@
       sort-by="calories"
     >
       <template v-slot:top>
-        <v-toolbar flat class="pa-0 my-6">
+        <v-toolbar flat class="pa-0 mt-6">
           <v-text-field
             v-model="search"
             prepend-inner-icon="mdi-magnify"
@@ -95,13 +95,13 @@
               <p>Are you sure you want to delete this endpoint?</p>
               <v-card-actions class="pa-0 mt-4">
                 <v-spacer></v-spacer>
-                <v-btn depressed class="text-none" @click="dialog = false">
+                <v-btn depressed class="text-none" @click="closeDelete">
                   Close
                 </v-btn>
                 <v-btn
                   depressed
                   class="error ms-3 text-none"
-                  @click="dialog = false"
+                  @click="deleteItemConfirm"
                 >
                   Delete
                 </v-btn>
@@ -109,9 +109,12 @@
             </v-card>
           </v-dialog>
         </v-toolbar>
-        <small
-          ><span>{{ placeholder }}f</span></small
-        >
+        <div class="my-2">
+          <small style="color: #000"><span>5 items selected</span></small>
+          <v-btn text color="primary ml-3" class="text-none"
+            ><v-icon small class="mr-1"> mdi-pencil </v-icon>Edit</v-btn
+          >
+        </div>
       </template>
 
       <template v-slot:[`item.actions`]="{ item }">
@@ -131,37 +134,37 @@ export default {
     dialog: false,
     dialogDelete: false,
     valid: true,
-    name: "",
+    name: '',
     nameRules: [
-      (v) => !!v || "Name is required",
-      (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
+      (v) => !!v || 'Name is required',
+      (v) => (v && v.length <= 10) || 'Name must be less than 10 characters',
     ],
-    email: "",
+    email: '',
     emailRules: [
-      (v) => !!v || "E-mail is required",
-      (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+      (v) => !!v || 'E-mail is required',
+      (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
     ],
     select: null,
-    items: ["Item 1", "Item 2", "Item 3", "Item 4"],
+    items: ['Item 1', 'Item 2', 'Item 3', 'Item 4'],
     checkbox: false,
-    search: "",
+    search: '',
     headers: [
       {
-        text: "Dessert (100g serving)",
-        align: "start",
+        text: 'Dessert (100g serving)',
+        align: 'start',
         filterable: false,
-        value: "name",
+        value: 'name',
       },
-      { text: "Calories", value: "calories" },
-      { text: "Fat (g)", value: "fat" },
-      { text: "Carbs (g)", value: "carbs" },
-      { text: "Protein (g)", value: "protein" },
-      { text: "Iron (%)", value: "iron" },
-      { text: "Actions", value: "actions", sortable: false },
+      { text: 'Calories', value: 'calories' },
+      { text: 'Fat (g)', value: 'fat' },
+      { text: 'Carbs (g)', value: 'carbs' },
+      { text: 'Protein (g)', value: 'protein' },
+      { text: 'Iron (%)', value: 'iron' },
+      { text: 'Actions', value: 'actions', sortable: false },
     ],
     desserts: [
       {
-        name: "Frozen Yogurt",
+        name: 'Frozen Yogurt',
         calories: 159,
         fat: 6.0,
         carbs: 24,
@@ -169,7 +172,7 @@ export default {
         iron: 1,
       },
       {
-        name: "Ice cream sandwich",
+        name: 'Ice cream sandwich',
         calories: 237,
         fat: 9.0,
         carbs: 37,
@@ -177,7 +180,7 @@ export default {
         iron: 1,
       },
       {
-        name: "Eclair",
+        name: 'Eclair',
         calories: 262,
         fat: 16.0,
         carbs: 23,
@@ -185,7 +188,7 @@ export default {
         iron: 7,
       },
       {
-        name: "Cupcake",
+        name: 'Cupcake',
         calories: 305,
         fat: 3.7,
         carbs: 67,
@@ -193,7 +196,7 @@ export default {
         iron: 8,
       },
       {
-        name: "Gingerbread",
+        name: 'Gingerbread',
         calories: 356,
         fat: 16.0,
         carbs: 49,
@@ -201,7 +204,7 @@ export default {
         iron: 16,
       },
       {
-        name: "Jelly bean",
+        name: 'Jelly bean',
         calories: 375,
         fat: 0.0,
         carbs: 94,
@@ -209,7 +212,7 @@ export default {
         iron: 0,
       },
       {
-        name: "Lollipop",
+        name: 'Lollipop',
         calories: 392,
         fat: 0.2,
         carbs: 98,
@@ -217,7 +220,7 @@ export default {
         iron: 2,
       },
       {
-        name: "Honeycomb",
+        name: 'Honeycomb',
         calories: 408,
         fat: 3.2,
         carbs: 87,
@@ -225,7 +228,7 @@ export default {
         iron: 45,
       },
       {
-        name: "Donut",
+        name: 'Donut',
         calories: 452,
         fat: 25.0,
         carbs: 51,
@@ -233,7 +236,7 @@ export default {
         iron: 22,
       },
       {
-        name: "KitKat",
+        name: 'KitKat',
         calories: 518,
         fat: 26.0,
         carbs: 65,
@@ -243,14 +246,14 @@ export default {
     ],
     editedIndex: -1,
     editedItem: {
-      name: "",
+      name: '',
       calories: 0,
       fat: 0,
       carbs: 0,
       protein: 0,
     },
     defaultItem: {
-      name: "",
+      name: '',
       calories: 0,
       fat: 0,
       carbs: 0,
@@ -260,7 +263,7 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+      return this.editedIndex === -1 ? 'New Item' : 'Edit Item';
     },
   },
 
@@ -290,70 +293,70 @@ export default {
     initialize() {
       this.desserts = [
         {
-          name: "Frozen Yogurt",
+          name: 'Frozen Yogurt',
           calories: 159,
           fat: 6.0,
           carbs: 24,
           protein: 4.0,
         },
         {
-          name: "Ice cream sandwich",
+          name: 'Ice cream sandwich',
           calories: 237,
           fat: 9.0,
           carbs: 37,
           protein: 4.3,
         },
         {
-          name: "Eclair",
+          name: 'Eclair',
           calories: 262,
           fat: 16.0,
           carbs: 23,
           protein: 6.0,
         },
         {
-          name: "Cupcake",
+          name: 'Cupcake',
           calories: 305,
           fat: 3.7,
           carbs: 67,
           protein: 4.3,
         },
         {
-          name: "Gingerbread",
+          name: 'Gingerbread',
           calories: 356,
           fat: 16.0,
           carbs: 49,
           protein: 3.9,
         },
         {
-          name: "Jelly bean",
+          name: 'Jelly bean',
           calories: 375,
           fat: 0.0,
           carbs: 94,
           protein: 0.0,
         },
         {
-          name: "Lollipop",
+          name: 'Lollipop',
           calories: 392,
           fat: 0.2,
           carbs: 98,
           protein: 0,
         },
         {
-          name: "Honeycomb",
+          name: 'Honeycomb',
           calories: 408,
           fat: 3.2,
           carbs: 87,
           protein: 6.5,
         },
         {
-          name: "Donut",
+          name: 'Donut',
           calories: 452,
           fat: 25.0,
           carbs: 51,
           protein: 4.9,
         },
         {
-          name: "KitKat",
+          name: 'KitKat',
           calories: 518,
           fat: 26.0,
           carbs: 65,
