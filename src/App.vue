@@ -1,18 +1,14 @@
 <template>
   <v-app>
     <div class="main-body">
-      <div class="mb-16">
+      <div class="mb-16 guide">
         <h1 class="mb-1 d-inline">General Guidelines:</h1>
-        <ul>
-          <li>
-            Anything that goes in a card such as a table or input fields for
-            modals, make sure the padding all is 24px on all sides.
-          </li>
-
-          <li>Buttons</li>
+        <ul style="max-width: 700px">
+          <li class="font-weight-bold mt-3">Buttons</li>
           <ul>
             <li>
-              Make all buttons depressed (they should not have any shadow).
+              Make all buttons depressed (they should be flat and not have any
+              shadow).
             </li>
             <li>
               Buttons next to eachother should have a 12px gap, do this by ms-3
@@ -24,6 +20,18 @@
               as a red button for a deleting action, or an orange button for a
               caution action.
             </li>
+          </ul>
+          <li class="font-weight-bold mt-3">Cards</li>
+          <ul>
+            <li>
+              Anything that goes in a card such as a table or a modal with
+              text/input fields make sure the padding all is 24px on all sides.
+              (pa-6)
+            </li>
+          </ul>
+          <li class="font-weight-bold mt-3">Modals</li>
+          <ul>
+            <li>Modal width is 500px.</li>
           </ul>
         </ul>
       </div>
@@ -172,5 +180,9 @@ li {
 
 .v-application a:hover {
   opacity: 0.64;
+}
+
+.guide {
+  line-height: 2;
 }
 </style>
