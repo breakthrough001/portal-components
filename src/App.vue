@@ -12,11 +12,17 @@
           <li>Buttons</li>
           <ul>
             <li>
-              Make all buttons depressed (they should not have any shadow)
+              Make all buttons depressed (they should not have any shadow).
             </li>
             <li>
               Buttons next to eachother should have a 12px gap, do this by ms-3
               on last button.
+            </li>
+            <li>
+              Modal buttons — use the Secondary one below, this neutral gray
+              won't clash when we have different color buttons in scenarios such
+              as a red button for a deleting action, or an orange button for a
+              caution action.
             </li>
           </ul>
         </ul>
@@ -82,7 +88,7 @@
       </div>
       <div class="mb-16">
         <div class="mb-4">
-          <h1 class="mb-4 inline">Advanced Tables</h1>
+          <h1 class="mb-4 d-inline">Advanced Tables</h1>
           <a
             href="https://github.com/breakthrough001/portal-components/blob/main/src/components/TableAdvanced.vue"
             target="_blank"
@@ -130,5 +136,13 @@ export default {
 p,
 li {
   color: #7f7f7f;
+}
+
+.v-application a {
+  transition: 300ms ease;
+}
+
+.v-application a:hover {
+  opacity: 0.64;
 }
 </style>
